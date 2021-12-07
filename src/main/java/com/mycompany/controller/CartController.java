@@ -23,7 +23,7 @@ public class CartController {
         HttpSession session = request.getSession(false);
         User u = (User) session.getAttribute("currentuser");
 
-        session.setAttribute("currentlist", );
+//        session.setAttribute("currentlist", );
         return "user-playlist";
     }
 }

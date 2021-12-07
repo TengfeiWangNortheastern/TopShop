@@ -22,13 +22,6 @@ public class AdminController {
 
     }
 
-    //display admin error form
-    @RequestMapping(value = "/error.htm")
-    public String showError(HttpServletRequest request) {
-        return "error";
-    }
-
-
     //display admin central dashboard
     @RequestMapping(value = "/admin/index.htm", method = RequestMethod.GET)
     public String showDashboard(HttpServletRequest request) {
