@@ -4,6 +4,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.List;
 
 @Entity
 public class User {
@@ -11,7 +12,6 @@ public class User {
     private String name;
     private String password;
     private String userType;
-
     @Id
     @Column(name = "id")
     public int getId() {

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Fei
@@ -34,6 +35,36 @@
     </style>
 </head>
 <body>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<h1> Top Shop Login </h1>
+<form action="${contextPath}/user/login.htm" method="POST">
+    <table>
+        <tr>
+            <td>USERNAME:</td>
+            <td><input type="text" name="username" id="username" maxlength="20" size="30" required="required" /></td>
+        </tr>
 
+        <tr>
+            <td>PASSWORD:</td>
+            <td><input type="password" name="password" id="password" maxlength="20" size="30" required="required"/></td>
+        </tr>
+
+        <tr>
+            <td colspan="2"><input type="submit" name="action" value="Login" /></td>
+        </tr>
+
+    </table>
+</form>
+<br><br>
+<div id="info"></div>
+<br><br><br><br>
+
+<a href="${contextPath}/user/login.htm">Create New User Account</a>
+
+<br>
+<a href="${contextPath}/admin/central.htm">I am a System Admin</a>
+
+
+</body>
 </body>
 </html>

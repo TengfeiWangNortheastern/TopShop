@@ -21,4 +21,5 @@
 
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
     <bean name="product" class="com.mycompany.pojo.Product"/>
+    <bean name="factory" class="com.mycompany.dao.DAOFactory" />
 </beans>

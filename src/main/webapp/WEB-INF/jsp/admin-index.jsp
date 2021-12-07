@@ -1,7 +1,11 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-
+<%--
+  Created by IntelliJ IDEA.
+  User: Fei
+  Date: 12/7/2021
+  Time: 12:06 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Start Page</title>
@@ -92,7 +96,7 @@
     </script>
 </head>
 <body>
-<h1><img src="img/fore/logo.png" title="Top Shop"></h1>
+<h1>Top Shop Administration Page</h1>
 <div class="sidenav">
     <div id="userTag">${sessionScope.currentUser.name}</div>
     <a href="/TopShop_war_exploded/index.htm" id="index">Home</a>
@@ -120,3 +124,4 @@
 </div>
 </body>
 </html>
+

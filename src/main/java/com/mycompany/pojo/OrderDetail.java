@@ -8,6 +8,7 @@ public class OrderDetail {
     private int quantity;
     private double subtotal;
     private Order orderByOrderId;
+    private Long id;
 
     @Basic
     @Column(name = "quantity")
@@ -60,5 +61,14 @@ public class OrderDetail {
 
     public void setOrderByOrderId(Order orderByOrderId) {
         this.orderByOrderId = orderByOrderId;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Id
+    public Long getId() {
+        return id;
     }
 }
