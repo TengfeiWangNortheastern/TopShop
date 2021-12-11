@@ -51,6 +51,10 @@ public class Product {
         return price;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public void setPrice(Double price) {
         this.price = price;
     }

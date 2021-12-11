@@ -2,14 +2,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: Fei
-  Date: 12/4/2021
-  Time: 11:27 AM
+  Date: 12/9/2021
+  Time: 3:59 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Error Page</title>
+    <title>Cart Error</title>
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>

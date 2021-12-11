@@ -78,7 +78,7 @@ public class UserController {
         if(session!=null){
             session.invalidate();
         }
-        return "LoginPage";
+        return "LogOut";
     }
 
     @RequestMapping(value = "/user/register.htm", method = RequestMethod.GET)

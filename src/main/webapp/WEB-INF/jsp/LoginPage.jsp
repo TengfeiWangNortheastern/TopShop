@@ -59,7 +59,7 @@
 <div id="info"></div>
 <br><br><br><br>
 
-<a href="${contextPath}/user/login.htm">Create New User Account</a>
+<a href="${contextPath}/user/register.htm">Create New User Account</a>
 
 <br>
 <a href="${contextPath}/admin/central.htm">I am a System Admin</a>

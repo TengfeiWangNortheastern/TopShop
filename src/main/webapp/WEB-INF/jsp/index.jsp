@@ -56,62 +56,28 @@
             display: block;
         }
     </style>
-    <script>
-        function ajaxEvent() {
-
-            var xmlHttp;
-            try // Firefox, Opera 8.0+, Safari
-            {
-                xmlHttp = new XMLHttpRequest();
-            } catch (e) {
-                try // Internet Explorer
-                {
-                    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-                } catch (e) {
-                    try {
-                        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-                    } catch (e) {
-                        alert("Your browser does not support AJAX!");
-                        return false;
-                    }
-                }
-            }
-
-            xmlHttp.onreadystatechange = function() {
-                if (xmlHttp.readyState == 4) {
-                    document.getElementById("info").innerHTML = xmlHttp.responseText;
-                }
-            }
-
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-
-            xmlHttp.open("POST", "../ajaxservice.htm?username="+username+"&password="+password, true);
-            xmlHttp.send();
-        }
-    </script>
 </head>
 <body>
 <h1><img src="img/fore/logo.png" title="Top Shop"></h1>
 <div class="sidenav">
     <div id="userTag">${sessionScope.currentUser.name}</div>
     <a href="/TopShop_war_exploded/index.htm" id="index">Home</a>
-    <a href="user/login.htm" id="login-selector">Login</a>
-    <a href="user/register.htm" id="register-selector">Register</a>
-    <a href="user/products.htm">Products</a>
-    <a href="cart.htm">Cart</a>
-    <a href="user/logout.htm">LogOut</a>
+    <a href="/TopShop_war_exploded/user/login.htm" id="login-selector">Login</a>
+    <a href="/TopShop_war_exploded/user/register.htm" id="register-selector">Register</a>
+    <a href="/TopShop_war_exploded/user/products.htm">Products</a>
+    <a href="/TopShop_war_exploded/user/cart.htm">Cart</a>
+    <a href="/TopShop_war_exploded/user/logout.htm">LogOut</a>
 </div>
 
 <!-- Page content -->
 <div class="main">
-    <button>Get Server Response</button>
+    <button>Quick Login</button>
     <div id="contentdiv"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $("button").click(function (){
             $.get("user/login.htm",function (data){
-                $("#contentdiv").html("AJAX"+data);
+                $("#contentdiv").html(data);
             });
         });
 

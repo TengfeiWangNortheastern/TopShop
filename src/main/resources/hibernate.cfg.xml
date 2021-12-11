@@ -35,8 +35,7 @@
         <mapping class="com.mycompany.pojo.Product" />
         <mapping class="com.mycompany.pojo.Order" />
         <mapping class="com.mycompany.pojo.User" />
-        <mapping class="com.mycompany.pojo.Product" />
-        <mapping class="com.mycompany.pojo.OrderDetail" />
+        <mapping class="com.mycompany.pojo.Orderitem" />
         <mapping class="com.mycompany.pojo.Review" />
     </session-factory>
 

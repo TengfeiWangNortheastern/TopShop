@@ -198,16 +198,8 @@
             height: 40px;
         }
 
-        button.buyButton {
-            border: 1px solid #FF0036;
-            background-color: #FFEDED;
-            text-align: center;
-            line-height: 40px;
-            font-size: 16px;
-            color: #FF0036;
-        }
 
-        button.addCartButton {
+        #button.addCartButton {
             border: 1px solid #FF0036;
             background-color: #FF0036;
             text-align: center;
@@ -216,104 +208,27 @@
             color: white;
         }
 
-        button.addCartButton span.glyphicon {
+        #button.addCartButton span.glyphicon {
             font-size: 12px;
             margin-right: 8px;
         }
     </style>
 </head>
 <body>
-<script>
-    $(function () {
-        $("img.smallImg").mouseenter(function () {
-            var bigImgURL = $(this).attr("bigImgURL");
-            $("img.bigImg").attr("src", bigImgURL);
-        });
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-        var stock = ${product.stock};
-        $(".productNumberSetting").keyup(function () {
-            var num = $(".productNumberSetting").val();
-            num = parseInt(num);
-            if (isNaN(num))
-                num = 1;
-            if (num <= 0)
-                num = 1;
-            if (num > stock)
-                num = stock;
-            $(".productNumberSetting").val(num);
-        });
-
-        $(".increaseNumber").click(function () {
-            var num = $(".productNumberSetting").val();
-            num++;
-            if (num > stock)
-                num = stock;
-            $(".productNumberSetting").val(num);
-        });
-        $(".decreaseNumber").click(function () {
-            var num = $(".productNumberSetting").val();
-            --num;
-            if (num <= 0)
-                num = 1;
-            $(".productNumberSetting").val(num);
-        });
-
-        $("div.productReviewDiv").hide();
-        $("a.productDetailTopReviewLink").click(function () {
-            $("div.productReviewDiv").show();
-            $("div.productDetailDiv").hide();
-        });
-        $("a.productReviewTopPartSelectedLink").click(function () {
-            $("div.productReviewDiv").hide();
-            $("div.productDetailDiv").show();
-        });
-
-
-        $(".addCartLink").click(function () {
-            var page = "checkLogin";
-            $.get(
-                page,
-                function (result) {
-                    if ("success" == result) {
-                        var product_id = ${product.id};
-                        var num = $(".productNumberSetting").val();
-                        var addCartpage = "/addCart";
-                        $.get(
-                            addCartpage,
-                            {"product_id": product_id, "num": num},
-                            function (result) {
-                                if ("success" == result) {
-                                    $(".addCartButton").html("已加入购物车");
-                                    $(".addCartButton").attr("disabled", "disabled");
-                                    $(".addCartButton").css("background-color", "lightgray");
-                                    $(".addCartButton").css("border-color", "lightgray");
-                                    $(".addCartButton").css("color", "black");
-                                }
-                                else {
-                                }
-                            }
-                        );
-                    }
-                    else {
-                        $("#loginModal").modal('show');
-                    }
-                }
-            );
-            return false;
-        });
-    });
-
-</script>
+<form action="${contextPath}/user/addCart.htm" method="get">
+    <input type="hidden" id="product_id" name="product_id" value="${product.id}">
 <div class="product">
     <div class="imgAndInfo">
         <div class="imgInimgAndInfo">
-            <img class="bigImg" src="img/product/${product.id}/1.jpg">
+            <img class="bigImg" src="img/product/${product.id}/1.png">
             <div class="smallImageDiv">
-                <img class="smallImg" src="img/product/${product.id}/1.jpg" bigImgURL="img/product/${product.id}/1.jpg">
-                <img class="smallImg" src="img/product/${product.id}/2.jpg" bigImgURL="img/product/${product.id}/2.jpg">
-                <img class="smallImg" src="img/product/${product.id}/3.jpg" bigImgURL="img/product/${product.id}/3.jpg">
-                <img class="smallImg" src="img/product/${product.id}/4.jpg" bigImgURL="img/product/${product.id}/4.jpg">
-                <img class="smallImg" src="img/product/${product.id}/5.jpg" bigImgURL="img/product/${product.id}/5.jpg">
+                <img class="smallImg" src="img/product/${product.id}/1.png" bigImgURL="img/product/${product.id}/1.png">
+                <img class="smallImg" src="img/product/${product.id}/2.png" bigImgURL="img/product/${product.id}/2.png">
+                <img class="smallImg" src="img/product/${product.id}/3.png" bigImgURL="img/product/${product.id}/3.png">
+                <img class="smallImg" src="img/product/${product.id}/4.png" bigImgURL="img/product/${product.id}/4.png">
+                <img class="smallImg" src="img/product/${product.id}/5.png" bigImgURL="img/product/${product.id}/5.png">
                 <div class="img4load hidden"></div>
             </div>
         </div>
@@ -323,11 +238,11 @@
                 ${product.name}
             </div>
             <div class="productSubTitle">
-                ${product.sub_title}
+                ${product.subTitle}
             </div>
             <div class="productPrice">
                 <div class="productPriceDiv">
-                    <div class="gouwujuanDiv"><img src="img/fore/tmall-coupon.png">
+                    <div class="gouwujuanDiv">
                         <span> Top Shop</span>
                     </div>
 
@@ -347,51 +262,20 @@
                 <span>Quantity</span>
                 <span>
                 <span class="productNumberSettingSpan">
-                <input type="text" id="number" value="1" class="productNumberSetting">
+                <input type="number" name="number" value="1" class="productNumberSetting">
                 </span>
-					<span class="arrow">
-                    <a class="increaseNumber" href="#nowhere">
-                    <span class="updown">
-                       <img src="img/fore/increase.png">
-                    </span>
-					</a>
-					<span class="updownMiddle"> </span>
-					<a class="decreaseNumber" href="#nowhere">
-						<span class="updown">
-                        <img src="img/fore/decrease.png">
-                    </span>
-					</a>
-					</span>
 					</span>
                 <span>stock${product.stock}</span>
             </div>
-            <script>
-                <%--$(function () {--%>
-                <%--$(".buyLink").click(function () {--%>
-                <%--var url = "/buyone?product_id="+${product.id}+--%>
-                <%--"&number=" + $("#number").text();--%>
-
-                <%--});--%>
-                <%--});--%>
-
-                <%--function buyLink() {--%>
-                <%--    window.location = "/buyone?product_id="+${product.id}+--%>
-                <%--    "&number=" + $("#number").val();--%>
-                <%--}--%>
-            </script>
             <div class="buyDiv">
                 <%--<c:set var="number" scope="page" value="${('#number').val()}"--%>
-                <a onclick="javascript:buyLink()" class="buyLink">
-                    <button class="buyButton">Buy Now</button>
-                </a>
-                <a class="addCartLink" href="#nowhere">
-                    <button class="addCartButton"><span class="glyphicon glyphicon-shopping-cart"></span>Add to cart</button>
-                </a>
+                    <input type="submit" id="button" class="addCartButton" value="Add to Cart"><span class="glyphicon glyphicon-shopping-cart"></span></input>
             </div>
         </div>
         <div style="clear:both"></div>
     </div>
 </div>
+</form>
 <div style="clear: both;"></div>
 <style>
     div.productDetailDiv {
@@ -533,31 +417,31 @@
         color: #999999;
     }
 </style>
-<div style="clear:both"></div>
-<div class="productReviewDiv" style="display: block;">
-    <div class="productReviewTopPart">
-        <div class="productReviewTopPart">
-            <a class="productReviewTopPartSelectedLink" href="#nowhere">Product Detail</a>
-            <a class="selected" href="#nowhere">Product Comments <span
-                    class="productReviewTopReviewLinkNumber">${product.reviewCount}</span> </a>
-        </div>
-        <div class="productReviewContentPart">
-            <c:forEach items="${reviews}" var="r">
-                <div class="productReviewItem">
-                    <div class="productReviewItemDesc">
-                        <div class="productReviewItemContent">
-                                ${r.content}
-                        </div>
-                        <div class="productReviewItemDate">${r.createDate}</div>
-                    </div>
-                    <div class="productReviewItemUserInfo">
-                            ${r.user.anonymousName}<span class="userInfoGrayPart">（匿名）</span>
-                    </div>
-                    <div style="clear:both"></div>
-                </div>
-            </c:forEach>
-        </div>
-    </div>
-</div>
+<%--<div style="clear:both"></div>--%>
+<%--<div class="productReviewDiv" style="display: block;">--%>
+<%--    <div class="productReviewTopPart">--%>
+<%--        <div class="productReviewTopPart">--%>
+<%--            <a class="productReviewTopPartSelectedLink" href="#nowhere">Product Detail</a>--%>
+<%--            <a class="selected" href="#nowhere">Product Comments <span--%>
+<%--                    class="productReviewTopReviewLinkNumber">${product.reviewCount}</span> </a>--%>
+<%--        </div>--%>
+<%--        <div class="productReviewContentPart">--%>
+<%--            <c:forEach items="${reviews}" var="r">--%>
+<%--                <div class="productReviewItem">--%>
+<%--                    <div class="productReviewItemDesc">--%>
+<%--                        <div class="productReviewItemContent">--%>
+<%--                                ${r.content}--%>
+<%--                        </div>--%>
+<%--                        <div class="productReviewItemDate">${r.createDate}</div>--%>
+<%--                    </div>--%>
+<%--                    <div class="productReviewItemUserInfo">--%>
+<%--                            ${r.user.anonymousName}<span class="userInfoGrayPart">（匿名）</span>--%>
+<%--                    </div>--%>
+<%--                    <div style="clear:both"></div>--%>
+<%--                </div>--%>
+<%--            </c:forEach>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 </body>
 </html>

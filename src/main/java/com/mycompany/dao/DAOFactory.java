@@ -10,4 +10,7 @@ public class DAOFactory {
     public ReviewDAO createReviewDAO(){
         return new ReviewDAO();
     }
+    public OrderDAO createOrderDAO(){
+        return new OrderDAO();
+    }
 }

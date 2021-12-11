@@ -177,8 +177,7 @@
       <div class="productImg-wrap">
 <%--        <a class="productImg" href="${contextPath}/showProduct?product_id=${p.id}">--%>
         <a class="productImg" href="${contextPath}/showProduct.htm?product_id=${p.id}">
-<%--          <img src="webapp/img/product/1/1.jpg">--%>
-          <img src="img/product/book5.png">
+          <img src="img/product/${p.id}/1.png">
         </a>
       </div>
       <div style="clear: both;"></div>

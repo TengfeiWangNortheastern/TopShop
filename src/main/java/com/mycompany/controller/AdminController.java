@@ -35,7 +35,7 @@ public class AdminController {
         UserDAO udao = factory.createUserDAO();
         List<User> userlist = udao.displayUserList();
         HttpSession session = request.getSession();
-        session.setAttribute("userist", userlist);
+        session.setAttribute("userlist", userlist);
         return "admin-users";
     }
 

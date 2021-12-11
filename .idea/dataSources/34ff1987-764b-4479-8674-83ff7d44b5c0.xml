@@ -722,7 +722,7 @@
       <Host>localhost</Host>
     </user>
     <table id="209" parent="9" name="order"/>
-    <table id="210" parent="9" name="order_detail"/>
+    <table id="210" parent="9" name="orderitem"/>
     <table id="211" parent="9" name="product"/>
     <table id="212" parent="9" name="review"/>
     <table id="213" parent="9" name="user"/>
@@ -740,7 +740,6 @@
     <column id="216" parent="209" name="order_date">
       <Position>3</Position>
       <DataType>datetime|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="217" parent="209" name="shipping_address">
       <Position>4</Position>
@@ -764,7 +763,7 @@
     </column>
     <column id="221" parent="209" name="total">
       <Position>8</Position>
-      <DataType>float|0s</DataType>
+      <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="222" parent="209" name="status">
@@ -777,188 +776,196 @@
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="224" parent="209" name="customer_fk_2_idx">
-      <ColNames>user_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="225" parent="209" name="PRIMARY">
+    <key id="224" parent="209" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>order_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="226" parent="209" name="order_id_UNIQUE">
+    <key id="225" parent="209" name="order_id_UNIQUE">
       <ColNames>order_id</ColNames>
       <UnderlyingIndexName>order_id_UNIQUE</UnderlyingIndexName>
     </key>
-    <foreign-key id="227" parent="209" name="customer_fk_2">
-      <ColNames>user_id</ColNames>
-      <RefTableName>user</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="228" parent="210" name="order_id">
+    <column id="226" parent="210" name="id">
       <Position>1</Position>
-      <DataType>int(11)|0s</DataType>
-    </column>
-    <column id="229" parent="210" name="product_id">
-      <Position>2</Position>
-      <DataType>int(11)|0s</DataType>
-    </column>
-    <column id="230" parent="210" name="quantity">
-      <Position>3</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="231" parent="210" name="subtotal">
-      <Position>4</Position>
-      <DataType>float|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <index id="232" parent="210" name="order_fk_idx">
-      <ColNames>order_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="233" parent="210" name="book_fk_2_idx">
-      <ColNames>product_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <foreign-key id="234" parent="210" name="order_fk">
-      <ColNames>order_id</ColNames>
-      <RefTableName>order</RefTableName>
-      <RefColNames>order_id</RefColNames>
-    </foreign-key>
-    <foreign-key id="235" parent="210" name="book_fk_2">
-      <ColNames>product_id</ColNames>
-      <RefTableName>product</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="236" parent="211" name="id">
-      <Position>1</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>int(10) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="237" parent="211" name="name">
+    <column id="227" parent="210" name="subtotal">
       <Position>2</Position>
-      <DataType>varchar(45)|0s</DataType>
+      <DataType>double|0s</DataType>
     </column>
-    <column id="238" parent="211" name="sub_title">
+    <column id="228" parent="210" name="product_id">
       <Position>3</Position>
-      <DataType>varchar(45)|0s</DataType>
+      <DataType>int(11)|0s</DataType>
     </column>
-    <column id="239" parent="211" name="price">
+    <column id="229" parent="210" name="order_id">
       <Position>4</Position>
-      <DataType>float|0s</DataType>
-    </column>
-    <column id="240" parent="211" name="sale">
-      <Position>5</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="241" parent="211" name="stock">
-      <Position>6</Position>
-      <DataType>int(11)|0s</DataType>
-    </column>
-    <column id="242" parent="211" name="reviewCount">
-      <Position>7</Position>
-      <DataType>int(11)|0s</DataType>
-    </column>
-    <key id="243" parent="211" name="PRIMARY">
+    <key id="230" parent="210" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="244" parent="212" name="review_id">
+    <column id="231" parent="211" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="245" parent="212" name="product_id">
+    <column id="232" parent="211" name="name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="233" parent="211" name="sub_title">
+      <Position>3</Position>
+      <DataType>varchar(45)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="234" parent="211" name="price">
+      <Position>4</Position>
+      <DataType>float|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="235" parent="211" name="sale">
+      <Position>5</Position>
+      <DataType>int(11)|0s</DataType>
+    </column>
+    <column id="236" parent="211" name="stock">
+      <Position>6</Position>
+      <DataType>int(11)|0s</DataType>
+    </column>
+    <column id="237" parent="211" name="reviewCount">
+      <Position>7</Position>
+      <DataType>int(11)|0s</DataType>
+    </column>
+    <index id="238" parent="211" name="name_UNIQUE">
+      <ColNames>name</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="239" parent="211" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="240" parent="211" name="name_UNIQUE">
+      <ColNames>name</ColNames>
+      <UnderlyingIndexName>name_UNIQUE</UnderlyingIndexName>
+    </key>
+    <column id="241" parent="212" name="review_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="242" parent="212" name="product_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="246" parent="212" name="user_id">
+    <column id="243" parent="212" name="user_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="247" parent="212" name="rating">
+    <column id="244" parent="212" name="rating">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="248" parent="212" name="headline">
+    <column id="245" parent="212" name="headline">
       <Position>5</Position>
       <DataType>varchar(128)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="249" parent="212" name="comment">
+    <column id="246" parent="212" name="comment">
       <Position>6</Position>
       <DataType>varchar(500)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="250" parent="212" name="review_time">
+    <column id="247" parent="212" name="review_time">
       <Position>7</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="251" parent="212" name="review_id_UNIQUE">
+    <index id="248" parent="212" name="review_id_UNIQUE">
       <ColNames>review_id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="252" parent="212" name="product_fk_idx">
+    <index id="249" parent="212" name="product_fk_idx">
       <ColNames>product_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="253" parent="212" name="user_fk_idx">
+    <index id="250" parent="212" name="user_fk_idx">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="254" parent="212" name="PRIMARY">
+    <key id="251" parent="212" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>review_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="255" parent="212" name="review_id_UNIQUE">
+    <key id="252" parent="212" name="review_id_UNIQUE">
       <ColNames>review_id</ColNames>
       <UnderlyingIndexName>review_id_UNIQUE</UnderlyingIndexName>
     </key>
-    <foreign-key id="256" parent="212" name="product_fk">
+    <foreign-key id="253" parent="212" name="product_fk">
       <ColNames>product_id</ColNames>
       <RefTableName>product</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="257" parent="212" name="user_fk">
+    <foreign-key id="254" parent="212" name="user_fk">
       <ColNames>user_id</ColNames>
       <RefTableName>user</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="258" parent="213" name="id">
+    <column id="255" parent="213" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="259" parent="213" name="name">
+    <column id="256" parent="213" name="name">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="260" parent="213" name="password">
+    <column id="257" parent="213" name="password">
       <Position>3</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="261" parent="213" name="user_type">
+    <column id="258" parent="213" name="user_type">
       <Position>4</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="262" parent="213" name="PRIMARY">
+    <index id="259" parent="213" name="id_UNIQUE">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <index id="260" parent="213" name="name_UNIQUE">
+      <ColNames>name</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="261" parent="213" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
+    </key>
+    <key id="262" parent="213" name="id_UNIQUE">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
+    </key>
+    <key id="263" parent="213" name="name_UNIQUE">
+      <ColNames>name</ColNames>
+      <UnderlyingIndexName>name_UNIQUE</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>

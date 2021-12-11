@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 @Entity
 public class Order {
     private int orderId;
+    private int userId;
     private Timestamp orderDate;
     private String shippingAddress;
     private String recipientName;
@@ -25,6 +26,16 @@ public class Order {
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;
+    }
+
+    @Basic
+    @Column(name = "user_id")
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Basic
@@ -105,6 +116,7 @@ public class Order {
         Order order = (Order) o;
 
         if (orderId != order.orderId) return false;
+        if (userId != order.userId) return false;
         if (Double.compare(order.total, total) != 0) return false;
         if (orderDate != null ? !orderDate.equals(order.orderDate) : order.orderDate != null) return false;
         if (shippingAddress != null ? !shippingAddress.equals(order.shippingAddress) : order.shippingAddress != null)
@@ -125,6 +137,7 @@ public class Order {
         int result;
         long temp;
         result = orderId;
+        result = 31 * result + userId;
         result = 31 * result + (orderDate != null ? orderDate.hashCode() : 0);
         result = 31 * result + (shippingAddress != null ? shippingAddress.hashCode() : 0);
         result = 31 * result + (recipientName != null ? recipientName.hashCode() : 0);
