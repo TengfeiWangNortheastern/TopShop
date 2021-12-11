@@ -3,5 +3,9 @@ package com.mycompany.util;
 public enum SysData {
         ADMIN,
         CUSTOMER,
-        SELLER
+        SELLER,
+        PENDING,
+        DELIVERED,
+        ACCEPTED,
+        PAID
 }

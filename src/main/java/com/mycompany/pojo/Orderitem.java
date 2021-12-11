@@ -1,16 +1,15 @@
 package com.mycompany.pojo;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.criterion.Order;
+
+import javax.persistence.*;
 
 @Entity
 public class Orderitem {
     private int id;
     private Double subtotal;
     private Integer productId;
-    private Integer orderId;
+    private Orders order;
 
     @Id
     @Column(name = "id")
@@ -42,15 +41,6 @@ public class Orderitem {
         this.productId = productId;
     }
 
-    @Basic
-    @Column(name = "order_id")
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -62,7 +52,6 @@ public class Orderitem {
         if (id != orderitem.id) return false;
         if (subtotal != null ? !subtotal.equals(orderitem.subtotal) : orderitem.subtotal != null) return false;
         if (productId != null ? !productId.equals(orderitem.productId) : orderitem.productId != null) return false;
-        if (orderId != null ? !orderId.equals(orderitem.orderId) : orderitem.orderId != null) return false;
 
         return true;
     }
@@ -72,7 +61,14 @@ public class Orderitem {
         int result = id;
         result = 31 * result + (subtotal != null ? subtotal.hashCode() : 0);
         result = 31 * result + (productId != null ? productId.hashCode() : 0);
-        result = 31 * result + (orderId != null ? orderId.hashCode() : 0);
         return result;
+    }
+    @ManyToOne
+    public Orders getOrder() {
+        return order;
+    }
+
+    public void setOrder(Orders order) {
+        this.order = order;
     }
 }

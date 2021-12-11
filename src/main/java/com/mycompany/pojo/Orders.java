@@ -1,31 +1,30 @@
 package com.mycompany.pojo;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
-public class Order {
-    private int orderId;
+public class Orders {
+    private int id;
     private int userId;
-    private Timestamp orderDate;
     private String shippingAddress;
     private String recipientName;
     private String recipientPhone;
-    private String paymentMethod;
+    private String payment;
     private double total;
     private String status;
+    private Timestamp time;
 
+    private List<Orderitem> orderitems;
     @Id
-    @Column(name = "order_id")
-    public int getOrderId() {
-        return orderId;
+    @Column(name = "id")
+    public int getId() {
+        return id;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Basic
@@ -36,16 +35,6 @@ public class Order {
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    @Basic
-    @Column(name = "order_date")
-    public Timestamp getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Timestamp orderDate) {
-        this.orderDate = orderDate;
     }
 
     @Basic
@@ -79,13 +68,13 @@ public class Order {
     }
 
     @Basic
-    @Column(name = "payment_method")
-    public String getPaymentMethod() {
-        return paymentMethod;
+    @Column(name = "payment")
+    public String getPayment() {
+        return payment;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public void setPayment(String payment) {
+        this.payment = payment;
     }
 
     @Basic
@@ -108,26 +97,35 @@ public class Order {
         this.status = status;
     }
 
+    @Basic
+    @Column(name = "time")
+    public Timestamp getTime() {
+        return time;
+    }
+
+    public void setTime(Timestamp time) {
+        this.time = time;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Order order = (Order) o;
+        Orders orders = (Orders) o;
 
-        if (orderId != order.orderId) return false;
-        if (userId != order.userId) return false;
-        if (Double.compare(order.total, total) != 0) return false;
-        if (orderDate != null ? !orderDate.equals(order.orderDate) : order.orderDate != null) return false;
-        if (shippingAddress != null ? !shippingAddress.equals(order.shippingAddress) : order.shippingAddress != null)
+        if (id != orders.id) return false;
+        if (userId != orders.userId) return false;
+        if (Double.compare(orders.total, total) != 0) return false;
+        if (shippingAddress != null ? !shippingAddress.equals(orders.shippingAddress) : orders.shippingAddress != null)
             return false;
-        if (recipientName != null ? !recipientName.equals(order.recipientName) : order.recipientName != null)
+        if (recipientName != null ? !recipientName.equals(orders.recipientName) : orders.recipientName != null)
             return false;
-        if (recipientPhone != null ? !recipientPhone.equals(order.recipientPhone) : order.recipientPhone != null)
+        if (recipientPhone != null ? !recipientPhone.equals(orders.recipientPhone) : orders.recipientPhone != null)
             return false;
-        if (paymentMethod != null ? !paymentMethod.equals(order.paymentMethod) : order.paymentMethod != null)
-            return false;
-        if (status != null ? !status.equals(order.status) : order.status != null) return false;
+        if (payment != null ? !payment.equals(orders.payment) : orders.payment != null) return false;
+        if (status != null ? !status.equals(orders.status) : orders.status != null) return false;
+        if (time != null ? !time.equals(orders.time) : orders.time != null) return false;
 
         return true;
     }
@@ -136,16 +134,24 @@ public class Order {
     public int hashCode() {
         int result;
         long temp;
-        result = orderId;
+        result = id;
         result = 31 * result + userId;
-        result = 31 * result + (orderDate != null ? orderDate.hashCode() : 0);
         result = 31 * result + (shippingAddress != null ? shippingAddress.hashCode() : 0);
         result = 31 * result + (recipientName != null ? recipientName.hashCode() : 0);
         result = 31 * result + (recipientPhone != null ? recipientPhone.hashCode() : 0);
-        result = 31 * result + (paymentMethod != null ? paymentMethod.hashCode() : 0);
+        result = 31 * result + (payment != null ? payment.hashCode() : 0);
         temp = Double.doubleToLongBits(total);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (time != null ? time.hashCode() : 0);
         return result;
+    }
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,orphanRemoval = true)
+    public List<Orderitem> getOrderitems() {
+        return orderitems;
+    }
+
+    public void setOrderitems(List<Orderitem> orderitems) {
+        this.orderitems = orderitems;
     }
 }

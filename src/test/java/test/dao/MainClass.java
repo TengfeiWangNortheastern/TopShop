@@ -8,15 +8,14 @@ package test.dao;
 import com.mycompany.dao.OrderDAO;
 import com.mycompany.dao.ProductDAO;
 import com.mycompany.dao.UserDAO;
-import com.mycompany.pojo.Order;
+import com.mycompany.pojo.Orderitem;
+import com.mycompany.pojo.Orders;
 import com.mycompany.pojo.Product;
 import com.mycompany.pojo.User;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.junit.Test;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  *
@@ -27,12 +26,12 @@ public class MainClass {
     @Test
     public void productTest() {
         Product product=new Product();
-        product.setName("HWatch");
-        product.setPrice(22.0);
-        product.setReviewCount(30);
-        product.setSale(120);
-        product.setStock(1000);
-        product.setSubTitle("watch");
+        product.setName("The North Face");
+        product.setPrice(200);
+        product.setReviewCount(12);
+        product.setSale(60);
+        product.setStock(400);
+        product.setSubTitle("cloth");
         ProductDAO productDAO=new ProductDAO();
         productDAO.createProduct(product);
     }
@@ -64,15 +63,28 @@ public class MainClass {
     @Test
     public void CreateOrderTest(){
         OrderDAO orderDAO=new OrderDAO();
-        Order order=new Order();
-        order.setTotal(100.0);
-        order.setShippingAddress("a");
-        order.setRecipientPhone("12");
+        Orders order=new Orders();
+        order.setTotal((double) 100.0);
+        order.setShippingAddress("aaaaa");
+        order.setRecipientPhone("12334");
         order.setStatus("Pending");
         order.setRecipientName("Tom");
-        order.setPaymentMethod("card");
+        order.setPayment("Card");
         order.setUserId(1);
+        order.setTime(new Timestamp(System.currentTimeMillis()));
+        orderDAO.createOrder(order);
+    }
+    @Test
+    public void manyTest(){
+        Orderitem o=new Orderitem();
+        Orders order=new Orders();
+        order.setOrderitems(new ArrayList<Orderitem>());
+        o.setOrder(order);
+        o.setProductId(1);
+        o.setSubtotal(100.0);
+        order.getOrderitems().add(o);
 
+        OrderDAO orderDAO=new OrderDAO();
         orderDAO.createOrder(order);
     }
 }
