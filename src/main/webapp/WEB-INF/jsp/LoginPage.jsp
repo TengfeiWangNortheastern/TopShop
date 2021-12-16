@@ -11,13 +11,37 @@
 <head>
     <title>Title</title>
     <style>
-        .header {
-            padding: 22px 0px;
-            height: 88px;
-            width: 1190px;
-            margin: auto;
+        .page {
+            width: 990px;
+            margin: 0 auto;
+            color: #3c3c3c;
+            font: 400 12px/1.6 arial, 'Hiragino Sans GB', "Arial Black", sans-serif;
         }
 
+        .page-top {
+            height: 46px;
+            border-bottom: 2px solid #e6e6e6;
+            position: relative;
+        }
+        .btn-register {
+            height: 36px;
+            line-height: 36px;
+            padding: 0 20px;
+            color: #FFF;
+            font-weight: 700;
+            font-size: 16px;
+            text-align: center;
+            background: #ff0036;;
+            border: 0;
+            vertical-align: middle;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 300px;
+        }
+
+        .btn-register:hover {
+            background-color: rgba(255, 0, 54, .8);
+        }
         a {
             text-decoration: none;
         }
@@ -36,21 +60,32 @@
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<h1> Top Shop Login </h1>
+<div class="page">
+<div class="page-top">
+    <div class="active">
+        <div class="tsl">Login Page</div>
+    </div>
+</div>
 <form action="${contextPath}/user/login.htm" method="POST">
     <table>
         <tr>
-            <td>USERNAME:</td>
-            <td><input type="text" name="username" id="username" maxlength="20" size="30" required="required" /></td>
+            <div class="form-item">
+            <td><span class="form-label tsl">USERNAME:</span></td>
+            <td><input type="text" name="username" id="username" maxlength="20" size="30" required="required"/></td>
+            </div>
         </tr>
 
         <tr>
-            <td>PASSWORD:</td>
+            <div class="form-item">
+            <td><span class="form-label tsl">PASSWORD:</span></td>
             <td><input type="password" name="password" id="password" maxlength="20" size="30" required="required"/></td>
+            </div>
         </tr>
 
         <tr>
-            <td colspan="2"><input type="submit" name="action" value="Login" /></td>
+            <div class="form-item">
+            <td colspan="2"><input type="submit" name="action" value="Login" class="btn-register"/></td>
+            </div>
         </tr>
 
     </table>
@@ -60,11 +95,9 @@
 <br><br><br><br>
 
 <a href="${contextPath}/user/register.htm">Create New User Account</a>
-
 <br>
-<a href="${contextPath}/admin/central.htm">I am a System Admin</a>
 
-
+</div>
 </body>
 </body>
 </html>

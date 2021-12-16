@@ -185,7 +185,7 @@
         font-size: 20px;
     }
 </style>
-<title>购物车</title>
+<title>Cart</title>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div class="cartDiv">
     <div class="cartTitle pull-right">
@@ -199,15 +199,13 @@
             <thead>
             <tr>
                 <th class="selectAndImage">
-                    <img selectit="false" class="selectAllItem" src="img/fore/cartNotSelected.png">
-                    全选
 
                 </th>
-                <th>商品信息</th>
-                <th>单价</th>
-                <th>数量</th>
-                <th width="120px">金额</th>
-                <th class="operation">操作</th>
+                <th>Product Information</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th width="120px">Price</th>
+                <th class="operation">Operation</th>
             </tr>
             </thead>
             <tbody>
@@ -246,7 +244,7 @@
 
                     </td>
                     <td>
-                        <a class="deleteOrderItem"  href="${contextPath}/user/deleteCart.htm?product_id=${oi.product.id}">删除</a>
+                        <a class="deleteOrderItem"  href="${contextPath}/user/deleteCart.htm?product_id=${oi.product.id}">delete</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -264,7 +262,15 @@
         <div class="pull-right">
             <span>Subtotal </span>
             <span class="cartSumPrice">${sessionScope.total}</span>
-            <input type="submit" class="createOrderButton" value="Continue To Checkout"></input>
+            <c:choose>
+<%--                <c:when test="${sessionScope.total==0}">--%>
+<%--                <input type="submit" class="createOrderButton" value="Continue To Checkout">--%>
+<%--                </c:when>--%>
+                <c:when test="${sessionScope.total>0}">
+                    <input type="submit" class="createOrderButton" value="Continue To Checkout">
+                </c:when>
+            </c:choose>
+
         </div>
 
     </div>

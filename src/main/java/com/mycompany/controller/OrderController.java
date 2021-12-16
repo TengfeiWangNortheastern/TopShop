@@ -64,12 +64,15 @@ public class OrderController {
         return "orderconfirm";
     }
 
-    @RequestMapping(value = "/createOrderItem.htm",method = RequestMethod.POST)
-    public String ajaxConfirmOrderItem(HttpServletRequest request){
+    @RequestMapping(value = "/user/showOrder.htm", method = RequestMethod.POST)
+    public String showUserOrder(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         User u = (User) session.getAttribute("currentUser");
-
-        return "success";
+        OrderDAO orderDAO=factory.createOrderDAO();
+        List<Orders> ordersByUserId = orderDAO.getOrdersByUserId(u.getId());
+        session.setAttribute("orders",ordersByUserId);
+        return "user-order";
     }
+    
 
 }

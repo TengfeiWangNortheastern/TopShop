@@ -5,6 +5,7 @@
  */
 package test.dao;
 
+import com.mycompany.dao.DAOFactory;
 import com.mycompany.dao.OrderDAO;
 import com.mycompany.dao.ProductDAO;
 import com.mycompany.dao.UserDAO;
@@ -12,10 +13,13 @@ import com.mycompany.pojo.Orderitem;
 import com.mycompany.pojo.Orders;
 import com.mycompany.pojo.Product;
 import com.mycompany.pojo.User;
+import com.mycompany.util.SysData;
+import org.hibernate.Criteria;
 import org.junit.Test;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -47,9 +51,9 @@ public class MainClass {
         User user=new User();
         user.setName("admin");
         user.setPassword("admin");
-
+        user.setUserType(SysData.ADMIN.toString());
         UserDAO userDAO=new UserDAO();
-//        userDAO.createUser(user);
+        userDAO.createUser(user);
     }
 
     @Test
@@ -86,5 +90,29 @@ public class MainClass {
 
         OrderDAO orderDAO=new OrderDAO();
         orderDAO.createOrder(order);
+    }
+
+    @Test
+    public void getOrderTest(){
+        int id=1;
+        OrderDAO orderDAO= new DAOFactory().createOrderDAO();
+        Orders ordersById = orderDAO.getOrdersById(1);
+        System.out.println(ordersById.getTotal());
+        List<Orderitem> orderitems = ordersById.getOrderitems();
+        System.out.println(orderitems.size());
+    }
+    @Test
+    public void getOrders(){
+        int id=1;
+        OrderDAO orderDAO= new DAOFactory().createOrderDAO();
+        List<Orders> allOrders = orderDAO.getAllOrders();
+        System.out.println(allOrders.size());
+    }
+    @Test
+    public void getOrdersstatus(){
+        String status=SysData.PENDING.toString();
+        OrderDAO orderDAO= new DAOFactory().createOrderDAO();
+        List<Orders> allOrders = orderDAO.getAllOrders(status);
+        System.out.println(allOrders.size());
     }
 }

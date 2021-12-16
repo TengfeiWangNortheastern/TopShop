@@ -9,6 +9,7 @@ import com.mycompany.dao.DAOFactory;
 import com.mycompany.dao.UserDAO;
 import com.mycompany.pojo.User;
 import com.mycompany.util.SysData;
+import com.mycompany.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,6 +29,9 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     private DAOFactory factory;
+
+    @Autowired
+    private UserValidator userValidator;
 
     public UserController(){
     }
@@ -58,7 +62,6 @@ public class UserController {
 
         try {
             User u = userdao.get(username, password);
-
             if (u != null) {
                 session.setAttribute("currentUser", u);
                 if (u.getUserType().equals(String.valueOf(SysData.ADMIN))) return "admin-index";

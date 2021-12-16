@@ -148,7 +148,7 @@
 <div class="page">
     <div class="page-top">
         <div class="active">
-            <div class="tsl">Register Page</div>
+            <div class="tsl"><h1>Register Page</h1></div>
         </div>
     </div>
 
@@ -170,7 +170,7 @@
                     </div>
                     <div class="radio-item">
                         <input type="radio" id="type1" name="accountType" value="customer"> Customer
-                        <input type="radio" id="type2" name="accountType" value="admin"> Administrator
+<%--                        <input type="radio" id="type2" name="accountType" value="admin"> Administrator--%>
                     </div>
                     <div class="form-item">
                         <button type="submit" class="btn-register">Confirm Register</button>

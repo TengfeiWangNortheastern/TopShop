@@ -38,12 +38,6 @@
             color: #f1f1f1;
         }
 
-        /* Style page content */
-        .main {
-            margin-left: 160px; /* Same as the width of the sidebar */
-            padding: 0px 10px;
-        }
-
         /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
         @media screen and (max-height: 450px) {
             .sidenav {padding-top: 15px;}
@@ -99,29 +93,12 @@
 <h1>Top Shop Administration Page</h1>
 <div class="sidenav">
     <div id="userTag">${sessionScope.currentUser.name}</div>
-    <a href="/TopShop_war_exploded/index.htm" id="index">Home</a>
-    <a href="user/login.htm" id="login-selector">Login</a>
-    <a href="user/register.htm" id="register-selector">Register</a>
+    <a href="/TopShop_war_exploded/admin/showOrder.htm" id="register-selector">Orders</a>
     <a href="user/products.htm">Products</a>
-    <a href="cart.htm">Cart</a>
-    <a href="user/logout.htm">LogOut</a>
+    <a href="user/products.htm">Users</a>
+    <a href="/TopShop_war_exploded/user/logout.htm">LogOut</a>
 </div>
 
-<!-- Page content -->
-<div class="main">
-    <button>Get Server Response</button>
-    <div id="contentdiv"></div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        $("button").click(function (){
-            $.get("user/login.htm",function (data){
-                $("#contentdiv").html("AJAX"+data);
-            });
-        });
-
-    </script>
-
-</div>
 </body>
 </html>
 
