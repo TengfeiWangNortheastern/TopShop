@@ -237,6 +237,7 @@
     <a class="active" href="${contextPath}/admin/index.htm">Home</a>
 <%--    <a href="#about">About</a>--%>
     <a>Admin Product page</a>
+<%--    <a href="${contextPath}/showProduct.htm?product_id=${p.id}">Home</a>--%>
     <form action="${contextPath}/admin/showProduct.htm" method="post">
         <a>
         <input type="radio" value="productid" name="color">Search By ID
@@ -244,6 +245,9 @@
         </a>
         <input type="text" placeholder="Search.." name="search">
         <input type="submit" value="search">
+    </form>
+    <form action="${contextPath}/admin/addProduct.htm" method="post">
+        <input type="submit" value="add">
     </form>
 </div>
 <hr>
@@ -253,7 +257,7 @@
         <div class="product-iWrap">
             <div class="productImg-wrap">
                     <%--        <a class="productImg" href="${contextPath}/showProduct?product_id=${p.id}">--%>
-                <a class="productImg" href="${contextPath}/showProduct.htm?product_id=${p.id}">
+                <a class="productImg" href="${contextPath}/admin/updateProduct.htm?product_id=${p.id}">
                     <img src="img/product/${p.id}/1.png">
                 </a>
             </div>
@@ -265,14 +269,18 @@
             </p>
             <div style="clear: both;"></div>
             <p class="productTitle">
-                <a href="${contextPath}/showProduct.htm?product_id=${p.id}">${p.name}</a>
+                <a href="${contextPath}/admin/updateProduct.htm?product_id=${p.id}">${p.name}</a>
             </p>
             <p class="productStatus">
                 <span>sale<em>${p.sale}</em></span>
                 <span>review<a href="#nowhere">${p.reviewCount}</a></span>
                 <span class="ww-light"><a></a></span>
             </p>
+            <p>
+                <a href="${contextPath}/admin/deleteProduct.htm?product_id=${p.id}">delete</a>
+            </p>
         </div>
+
     </div>
 </c:forEach>
 </body>

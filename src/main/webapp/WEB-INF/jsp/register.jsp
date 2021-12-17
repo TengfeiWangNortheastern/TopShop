@@ -170,7 +170,7 @@
                         <input type="password" id="password-confirm" name="password-confirm" required>
                     </div>
                     <div class="radio-item">
-                        <input type="radio" id="type1" name="accountType" value="customer"> Customer
+                        <input type="radio" id="type1" name="accountType" value="customer" required> Customer
 <%--                        <input type="radio" id="type2" name="accountType" value="admin"> Administrator--%>
                     </div>
                     <div class="form-item">

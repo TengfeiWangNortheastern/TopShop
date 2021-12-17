@@ -82,7 +82,7 @@ public class OrderDAO extends DAO{
             begin();
             Query query = getSession().createQuery("from Orders where userId=:name");
             query.setInteger("name",id);
-            List<Orders> ordersList=(List<Orders>) query.uniqueResult();
+            List<Orders> ordersList=(List<Orders>) query.list();
             commit();
             System.out.println("got user orders");
             return ordersList;

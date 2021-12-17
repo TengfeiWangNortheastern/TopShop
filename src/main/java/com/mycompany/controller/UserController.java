@@ -6,20 +6,28 @@
 package com.mycompany.controller;
 
 import com.mycompany.dao.DAOFactory;
+import com.mycompany.dao.OrderDAO;
+import com.mycompany.dao.ProductDAO;
 import com.mycompany.dao.UserDAO;
+import com.mycompany.pojo.Orders;
+import com.mycompany.pojo.Product;
 import com.mycompany.pojo.User;
 import com.mycompany.util.SysData;
 import com.mycompany.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.persistence.Entity;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -42,13 +50,13 @@ public class UserController {
         return "error";
     }
 
-    //display admin login form
-    @RequestMapping(value="/user/login.htm", method = RequestMethod.GET)
-    public String showLogin(HttpServletRequest request){
-        return "LoginPage";
-    }
+//    //display admin login form
+//    @RequestMapping(value="/user/login.htm", method = RequestMethod.GET)
+//    public String showLogin(HttpServletRequest request){
+//        return "LoginPage";
+//    }
 
-    @RequestMapping(value = "/user/login.htm", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/login.htm")
     public String handleLoginForm(HttpServletRequest request,  ModelMap map) {
 
         UserDAO userdao = factory.createUserDAO();
@@ -70,7 +78,7 @@ public class UserController {
             }
         }
         catch (Exception e) {
-            System.out.println("Could not login user "  +  e.getMessage());
+            return "error";
         }
         return "LoginPage";
     }
@@ -118,5 +126,38 @@ public class UserController {
     @RequestMapping(value = "/user/delete.htm", method = RequestMethod.GET)
     public String deleteUser(HttpServletRequest request) {
         return "LoginPage";
+    }
+
+
+    @RequestMapping(value = "/user/showOrders.htm")
+    public String showAdminUser(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("currentUser");
+        OrderDAO orderDAO=factory.createOrderDAO();
+        List<Orders> ordersByUserId = orderDAO.getOrdersByUserId(user.getId());
+        session.setAttribute("adminorders",ordersByUserId);
+        return "user-order";
+    }
+    @RequestMapping(value = "/user/changeStatusAccept.htm")
+    public String acceptUserOrder(HttpServletRequest request,Model model, @RequestParam String order_id) {
+        OrderDAO orderDAO = factory.createOrderDAO();
+        HttpSession session = request.getSession();
+        Orders ordersById = orderDAO.getOrdersById(Integer.valueOf(order_id));
+        ordersById.setStatus(SysData.ACCEPTED.toString());
+        User user = (User) session.getAttribute("currentUser");
+        List<Orders> ordersByUserId = orderDAO.getOrdersByUserId(user.getId());
+        session.setAttribute("adminorders",ordersByUserId);
+        return "user-order";
+    }
+    @RequestMapping(value = "/user/changeStatusCancel.htm")
+    public String cancelUserOrder(HttpServletRequest request,Model model, @RequestParam String order_id) {
+        OrderDAO orderDAO = factory.createOrderDAO();
+        HttpSession session = request.getSession();
+        Orders ordersById = orderDAO.getOrdersById(Integer.valueOf(order_id));
+        ordersById.setStatus(SysData.CANCELED.toString());
+        User user = (User) session.getAttribute("currentUser");
+        List<Orders> ordersByUserId = orderDAO.getOrdersByUserId(user.getId());
+        session.setAttribute("adminorders",ordersByUserId);
+        return "user-order";
     }
 }

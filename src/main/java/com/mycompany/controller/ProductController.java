@@ -5,6 +5,7 @@ import com.mycompany.dao.ProductDAO;
 import com.mycompany.dao.ReviewDAO;
 import com.mycompany.pojo.Product;
 import com.mycompany.pojo.Review;
+import com.mycompany.util.CategoryData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,10 +28,31 @@ public class ProductController {
     }
     @RequestMapping(value="/user/products.htm", method = RequestMethod.GET)
     public String displayArtists(HttpServletRequest request){
-        ProductDAO mdao = factory.createProductDAO();
-        List<Product> productList = mdao.displayProductList();
         HttpSession session = request.getSession();
-        session.setAttribute("productlist", productList);
+        ProductDAO productDAO=factory.createProductDAO();
+        try{
+            String color = request.getParameter("color");
+            String id = request.getParameter("search");
+            if("productid".equals(color)) {
+                Product product= productDAO.getProductByID(Integer.valueOf(id));
+                List<Product> list=new ArrayList<>();
+                if(product!=null)list.add(product);
+                session.setAttribute("productlist",list);
+                return "user-productlist";
+            }else if("productname".equals(color)){
+                List<Product> list = productDAO.searchProductListByKeyWord(id);
+                session.setAttribute("productlist",list);
+                return "user-productlist";
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            List<Product> list = productDAO.displayProductList();
+            session.setAttribute("productlist",list);
+            return "user-productlist";
+        }
+
+        List<Product> list = productDAO.displayProductList();
+        session.setAttribute("productlist",list);
         return "user-productlist";
     }
     @RequestMapping(value="/showProduct.htm", method = RequestMethod.GET)
@@ -48,4 +71,6 @@ public class ProductController {
 
         return "product";
     }
+
+
 }

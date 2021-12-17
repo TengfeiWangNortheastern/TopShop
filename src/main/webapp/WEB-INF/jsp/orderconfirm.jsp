@@ -11,17 +11,7 @@
     <title>Confirm Page</title>
 </head>
 <body>
-<button>Confirm</button>
-<div id="contentdiv"></div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    $("button").click(function (){
-        $.get("success",function (data){
-            $("#contentdiv").html(data);
-        });
-    });
-
-</script>
-
+<h1>Order Confirmed!</h1>
+<a href="/TopShop_war_exploded/index.htm" id="index">Go Back To Home Page</a>
 </body>
 </html>

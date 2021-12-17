@@ -72,9 +72,9 @@
     <a href="/TopShop_war_exploded/user/products.htm">Products</a>
     <c:choose>
     <c:when test="${not empty sessionScope.currentUser}">
-    <a href="/TopShop_war_exploded/user/cart.htm">Order</a>
     <a href="/TopShop_war_exploded/user/cart.htm">Cart</a>
-    <a href="/TopShop_war_exploded/user/logout.htm">LogOut</a>
+        <a href="/TopShop_war_exploded/user/showOrders.htm">Order</a>
+        <a href="/TopShop_war_exploded/user/logout.htm">LogOut</a>
     </c:when>
     </c:choose>
 </div>

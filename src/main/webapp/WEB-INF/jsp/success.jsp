@@ -12,5 +12,6 @@
 </head>
 <body>
   <h1>Success!</h1>
+  <a href="/TopShop_war_exploded/index.htm" id="index">Go Back To Home Page</a>
 </body>
 </html>

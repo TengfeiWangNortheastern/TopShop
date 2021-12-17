@@ -201,7 +201,6 @@
                 <th class="selectAndImage">
 
                 </th>
-                <th>Product Information</th>
                 <th>Unit Price</th>
                 <th>Quantity</th>
                 <th width="120px">Price</th>

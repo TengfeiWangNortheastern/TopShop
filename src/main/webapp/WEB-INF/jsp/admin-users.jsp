@@ -162,8 +162,8 @@
     <a class="active" href="${contextPath}/admin/index.htm">Home</a>
 
     <%--    <a href="#about">About</a>--%>
-    <a>Admin Product page</a>
-    <form action="${contextPath}/admin/showProduct.htm" method="post">
+    <a>Admin User page</a>
+    <form action="${contextPath}/admin/showUsers.htm" method="post">
         <a>
             <input type="radio" value="userid" name="color">Search By ID
             <input type="radio" value="username" name="color">Search By Name
@@ -177,27 +177,19 @@
         <table class="cartProductTable" id="table">
             <thead>
             <tr>
-                <th>Order id</th>
-                <th>total</th>
-                <th>payment</th>
-                <th>address</th>
-                <th>recipient name</th>
-                <th>status</th>
-                <th>time</th>
-                <th>userId</th>
+                <th>User id</th>
+                <th>name</th>
+                <th>password</th>
+                <th>Type</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${sessionScope.adminorders}" var="oi">
+            <c:forEach items="${sessionScope.userlist}" var="oi">
             <tr>
-                <td> <a href="${contextPath}/admin/showSelectedOrder.htm?order_id=${oi.id}">${oi.id}</a></td>
-                <td> ${oi.total}</td>
-                <td> ${oi.payment}</td>
-                <td> ${oi.shippingAddress}</td>
-                <td> ${oi.recipientName}</td>
-                <td> ${oi.status}</td>
-                <td> ${oi.time}</td>
-                <td> ${oi.userId}</td>
+                <td> <a href="${contextPath}/admin/showSelectedUser.htm?user_id=${oi.id}">${oi.id}</a></td>
+                <td> ${oi.name}</td>
+                <td> ${oi.password}</td>
+                <td> ${oi.userType}</td>
                 <td><a class="deleteOrderItem"  href="${contextPath}/admin/deleteUser.htm?user_id=${oi.id}">delete</a><td>
             </tr>
             </c:forEach>
