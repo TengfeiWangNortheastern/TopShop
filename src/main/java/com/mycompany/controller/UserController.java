@@ -95,6 +95,9 @@ public class UserController {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String confirm_password=request.getParameter("password-confirm");
+        if(!password.equals(confirm_password))
+            return "register";
         String userType= request.getParameter("accountType");
         System.out.println(username + " " + password+" "+userType);
         if ("customer".equals(userType)){

@@ -5,6 +5,7 @@
  */
 package com.mycompany.dao;
 
+import com.mycompany.pojo.Product;
 import com.mycompany.pojo.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -99,6 +100,20 @@ public class UserDAO extends DAO{
             return null;
         }
     }
+    public User getUserById(int s){
+        try {
+            begin();
+            Query query = getSession().createQuery("from User where id=:name");
+            query.setInteger("name",s);
+            User product=(User) query.uniqueResult();
+            close();
+            return product;
+        } catch (HibernateException e) {
+            rollback();
+            System.out.println("Could not get product" +  e.getMessage());
+            return null;
+        }
+    }
 
     public User get(String username,String password){
         try {
@@ -140,4 +155,20 @@ public class UserDAO extends DAO{
             return null;
         }
     }
+
+//    public List<User> searchUserListByKeyWord(String s){
+//        try {
+//            begin();
+//            Query query = getSession().createQuery("from User where name like :name");
+//            String keywords="%"+s+"%";
+//            query.setString("name",keywords);
+//            List<User> list = query.list();
+//            commit();
+//            return list;
+//        } catch (HibernateException e) {
+//            rollback();
+//            System.out.println("Could not get users" +  e.getMessage());
+//            return null;
+//        }
+//    }
 }

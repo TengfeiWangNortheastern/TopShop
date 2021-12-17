@@ -7,5 +7,7 @@ public enum SysData {
         PENDING,
         DELIVERED,
         ACCEPTED,
-        PAID
+        PAID,
+        CANCELED
 }
+

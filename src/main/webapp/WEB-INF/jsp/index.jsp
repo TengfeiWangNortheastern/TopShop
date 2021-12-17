@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -62,16 +63,29 @@
 <div class="sidenav">
     <div id="userTag">${sessionScope.currentUser.name}</div>
     <a href="/TopShop_war_exploded/index.htm" id="index">Home</a>
+    <c:choose>
+    <c:when test="${empty sessionScope.currentUser}">
     <a href="/TopShop_war_exploded/user/login.htm" id="login-selector">Login</a>
     <a href="/TopShop_war_exploded/user/register.htm" id="register-selector">Register</a>
+    </c:when>
+    </c:choose>
     <a href="/TopShop_war_exploded/user/products.htm">Products</a>
+    <c:choose>
+    <c:when test="${not empty sessionScope.currentUser}">
+    <a href="/TopShop_war_exploded/user/cart.htm">Order</a>
     <a href="/TopShop_war_exploded/user/cart.htm">Cart</a>
     <a href="/TopShop_war_exploded/user/logout.htm">LogOut</a>
+    </c:when>
+    </c:choose>
 </div>
 
 <!-- Page content -->
 <div class="main">
+    <c:choose>
+        <c:when test="${empty sessionScope.currentUser}">
     <button>Quick Login</button>
+    </c:when>
+    </c:choose>
     <div id="contentdiv"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>

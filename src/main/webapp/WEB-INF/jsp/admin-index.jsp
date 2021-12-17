@@ -54,48 +54,14 @@
             display: block;
         }
     </style>
-    <script>
-        function ajaxEvent() {
-
-            var xmlHttp;
-            try // Firefox, Opera 8.0+, Safari
-            {
-                xmlHttp = new XMLHttpRequest();
-            } catch (e) {
-                try // Internet Explorer
-                {
-                    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-                } catch (e) {
-                    try {
-                        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-                    } catch (e) {
-                        alert("Your browser does not support AJAX!");
-                        return false;
-                    }
-                }
-            }
-
-            xmlHttp.onreadystatechange = function() {
-                if (xmlHttp.readyState == 4) {
-                    document.getElementById("info").innerHTML = xmlHttp.responseText;
-                }
-            }
-
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-
-            xmlHttp.open("POST", "../ajaxservice.htm?username="+username+"&password="+password, true);
-            xmlHttp.send();
-        }
-    </script>
 </head>
 <body>
 <h1>Top Shop Administration Page</h1>
 <div class="sidenav">
     <div id="userTag">${sessionScope.currentUser.name}</div>
     <a href="/TopShop_war_exploded/admin/showOrder.htm" id="register-selector">Orders</a>
-    <a href="user/products.htm">Products</a>
-    <a href="user/products.htm">Users</a>
+    <a href="/TopShop_war_exploded/admin/showProduct.htm">Products</a>
+    <a href="/TopShop_war_exploded/admin/showUsers.htm">Users</a>
     <a href="/TopShop_war_exploded/user/logout.htm">LogOut</a>
 </div>
 

@@ -107,7 +107,6 @@ public class ProductDAO extends DAO{
             System.out.println("Could not get product " +  e.getMessage());
             return null;
         }
-
     }
     public Product getProductByID(int id){
         try {
@@ -124,4 +123,6 @@ public class ProductDAO extends DAO{
         }
 
     }
+
+
 }

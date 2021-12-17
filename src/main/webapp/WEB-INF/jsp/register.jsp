@@ -6,7 +6,8 @@
   Time: 2:19 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" isELIgnored="false" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -158,15 +159,15 @@
                 <div class="form-group">
                     <div class="form-item">
                         <span class="form-label tsl">User Name</span>
-                        <input type="text" id="username" name="username" value="${username}" placeholder="Please input user name">
+                        <input type="text" id="username" name="username" value="${username}" placeholder="Please input user name" required>
                     </div>
                     <div class="form-item">
                         <span class="form-label tsl">Password</span>
-                        <input type="password" id="password" name="password">
+                        <input type="password" id="password" name="password" required>
                     </div>
                     <div class="form-item">
                         <span class="form-label tsl">Confirm Password</span>
-                        <input type="password" id="password-confirm" name="password-confirm">
+                        <input type="password" id="password-confirm" name="password-confirm" required>
                     </div>
                     <div class="radio-item">
                         <input type="radio" id="type1" name="accountType" value="customer"> Customer

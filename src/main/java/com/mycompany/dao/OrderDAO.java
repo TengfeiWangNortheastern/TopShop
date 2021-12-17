@@ -107,18 +107,18 @@ public class OrderDAO extends DAO{
             return null;
         }
     }
-    public List<Orderitem> getOrderItemsByOrderId(int id){
+    public List<Orderitem> getOrderItemsByOrderId(Orders order){
         try {
             begin();
-            Query query = getSession().createQuery("from Orderitem where id=:name");
-            query.setInteger("name",id);
-            List<Orderitem> ordersList=query.list();
+            Criteria criteria=getSession().createCriteria(Orderitem.class);
+            criteria.add(Restrictions.eq("order",order));
+            List<Orderitem> ordersList=criteria.list();
             commit();
-            System.out.println("got user orders by orderID");
+            System.out.println("got orders items by orderID");
             return ordersList;
         } catch (HibernateException e) {
             rollback();
-            System.out.println("Could not get user orders " +  e.getMessage());
+            System.out.println("Could not get order items" +  e.getMessage());
             return null;
         }
     }
@@ -149,4 +149,26 @@ public class OrderDAO extends DAO{
             return null;
         }
     }
+    public void updateOrder(Orders orders){
+        try {
+            begin();
+            getSession().update(orders);
+            commit();
+        }
+        catch (HibernateException e) {
+            rollback();
+            System.out.println("Could not update order: " +  e.getMessage());
+        }
+    }
+    public void deleteOrder(Orders orders){
+        try {
+            begin();
+            getSession().delete(orders);
+            commit();
+        } catch (HibernateException e) {
+            rollback();
+            System.out.println("Could not delete order: " +  e.getMessage());
+        }
+    }
+
 }

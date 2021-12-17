@@ -301,15 +301,15 @@
                     <tr>
                         <td class="firstColumn">Detailed Address<span class="redStar">*</span></td>
 
-                        <td><textarea name="address" placeholder="Your street, state"></textarea></td>
+                        <td><textarea name="address" placeholder="Your street, state" required></textarea></td>
                     </tr>
                     <tr>
                         <td>Receiver Name<span class="redStar">*</span></td>
-                        <td><input name="receiver" placeholder="name" type="text"></td>
+                        <td><input name="receiver" placeholder="name" type="text" required></td>
                     </tr>
                     <tr>
-                        <td>Phone <span class="redStar">*</span></td>
-                        <td><input name="mobile" placeholder="phone number" type="text"></td>
+                        <td>Phone (10 digit)<span class="redStar">*</span></td>
+                        <td><input name="mobile" placeholder="phone number" type="text" pattern="[0-9]{10}" required></td>
                     </tr>
                     <tr>
                         <td>Payment Method <span class="redStar">*</span></td>

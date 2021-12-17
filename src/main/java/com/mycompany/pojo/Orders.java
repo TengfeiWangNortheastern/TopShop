@@ -7,7 +7,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
-@Transactional
 public class Orders {
     private int id;
     private int userId;

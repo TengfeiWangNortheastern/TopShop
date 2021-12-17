@@ -13,6 +13,7 @@ import com.mycompany.pojo.Orderitem;
 import com.mycompany.pojo.Orders;
 import com.mycompany.pojo.Product;
 import com.mycompany.pojo.User;
+import com.mycompany.util.CategoryData;
 import com.mycompany.util.SysData;
 import org.hibernate.Criteria;
 import org.junit.Test;
@@ -30,12 +31,24 @@ public class MainClass {
     @Test
     public void productTest() {
         Product product=new Product();
+        product.setName("Harry Potter");
+        product.setPrice(20);
+        product.setReviewCount(20);
+        product.setSale(60);
+        product.setStock(400);
+        product.setSubTitle(CategoryData.BOOK.toString());
+        ProductDAO productDAO=new ProductDAO();
+        productDAO.createProduct(product);
+    }
+    @Test
+    public void productTest2() {
+        Product product=new Product();
         product.setName("The North Face");
         product.setPrice(200);
         product.setReviewCount(12);
         product.setSale(60);
         product.setStock(400);
-        product.setSubTitle("cloth");
+        product.setSubTitle(CategoryData.CLOTHES.toString());
         ProductDAO productDAO=new ProductDAO();
         productDAO.createProduct(product);
     }
@@ -82,10 +95,19 @@ public class MainClass {
     public void manyTest(){
         Orderitem o=new Orderitem();
         Orders order=new Orders();
+        order.setTotal((double) 100.0);
+        order.setShippingAddress("aaaaa");
+        order.setRecipientPhone("12334");
+        order.setStatus("Pending");
+        order.setRecipientName("Tom");
+        order.setPayment("Card");
+        order.setUserId(1);
+        order.setTime(new Timestamp(System.currentTimeMillis()));
         order.setOrderitems(new ArrayList<Orderitem>());
         o.setOrder(order);
         o.setProductId(1);
         o.setSubtotal(100.0);
+
         order.getOrderitems().add(o);
 
         OrderDAO orderDAO=new OrderDAO();
@@ -114,5 +136,23 @@ public class MainClass {
         OrderDAO orderDAO= new DAOFactory().createOrderDAO();
         List<Orders> allOrders = orderDAO.getAllOrders(status);
         System.out.println(allOrders.size());
+    }
+    @Test
+    public void getOrdersByOrderId(){
+        OrderDAO orderDAO= new DAOFactory().createOrderDAO();
+        Orders ordersById = orderDAO.getOrdersById(1);
+        List<Orderitem> orderItemsByOrderId = orderDAO.getOrderItemsByOrderId(ordersById);
+        System.out.println(orderItemsByOrderId.size());
+    }
+
+    @Test
+    public void updateOrder(){
+        OrderDAO orderDAO=new OrderDAO();
+        Orders order=orderDAO.getOrdersById(5);
+        order.setPayment("cash");
+        order.setRecipientName("receiver");
+        order.setRecipientPhone("8572655561");
+        order.setShippingAddress("address");
+        orderDAO.updateOrder(order);
     }
 }

@@ -171,6 +171,22 @@
 </style>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<div class="topnav">
+  <a class="active" href="${contextPath}/admin/index.htm">Home</a>
+
+  <%--    <a href="#about">About</a>--%>
+  <a>Admin Product page</a>
+  <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+  <form action="${contextPath}/admin/showProduct.htm" method="post">
+    <a>
+      <input type="radio" value="productid" name="color">Search By ID
+      <input type="radio" value="productname" name="color">Search By Name
+    </a>
+    <input type="text" placeholder="Search.." name="search">
+    <input type="submit" value="search">
+  </form>
+</div>
+<hr>
 <c:forEach items="${sessionScope.productlist}" var="p">
   <div class="product">
     <div class="product-iWrap">
